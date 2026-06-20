@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        // Base case 1: Both nodes are null (reached the leaf ends together)
+        if (p == nullptr && q == nullptr) {
+            return true;
+        }
+        
+        // Base case 2: One node is null but the other isn't (structural mismatch)
+        if (p == nullptr || q == nullptr) {
+            return false;
+        }
+        
+        // Base case 3: The values don't match
+        if (p->val != q->val) {
+            return false;
+        }
+        
+        // Recursively check if both left subtrees and right subtrees match
+        return isSameTree(p->left, q->left) && isSameTree(p->right, q->right);
+    }
+};
