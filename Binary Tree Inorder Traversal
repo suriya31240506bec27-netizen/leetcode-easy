@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> result;
+        stack<TreeNode*> s;
+        TreeNode* curr = root;
+
+        // Keep running until we visit all nodes and empty the stack
+        while (curr != nullptr || !s.empty()) {
+            // 1. Travel as far left as possible, pushing paths to stack
+            while (curr != nullptr) {
+                s.push(curr);
+                curr = curr->left;
+            }
+
+            // 2. Node has no more left children, pop it from stack
+            curr = s.top();
+            s.pop();
+            result.push_back(curr->val); // Visit Root
+
+            // 3. We are done with this node and its left side; move right
+            curr = curr->right;
+        }
+
+        return result;
+    }
+};
