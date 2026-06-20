@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        // An empty tree is inherently symmetric
+        if (root == nullptr) {
+            return true;
+        }
+        // Check if the left and right subtrees are mirrors of each other
+        return isMirror(root->left, root->right);
+    }
+
+private:
+    bool isMirror(TreeNode* t1, TreeNode* t2) {
+        // Base case: both nodes are null
+        if (t1 == nullptr && t2 == nullptr) {
+            return true;
+        }
+        // One node is null but the other isn't (asymmetry)
+        if (t1 == nullptr || t2 == nullptr) {
+            return false;
+        }
+        // Values do not match
+        if (t1->val != t2->val) {
+            return false;
+        }
+        
+        // Crucial mirror check: left vs right, and right vs left
+        return isMirror(t1->left, t2->right) && isMirror(t1->right, t2->left);
+    }
+};
